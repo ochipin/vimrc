@@ -62,3 +62,9 @@ endfunction
 
 " ショートカットキー、 Ctrl + N で行番号の表示・非表示を切り替える
 nnoremap <silent> <C-n> :call Setnumber()<CR>
+
+" 以前開いたカーソル位置へ移動する
+augroup vimrcEx
+    au BufRead * if line("'\"") > 0 && line("'\"") <= line("$") |
+    \ exe "normal g'\"" | endif
+augroup END
