@@ -51,17 +51,10 @@ filetype plugin indent on
 " 行番号を表示する
 set number
 
-" 行番号の表示・非表示を切り替える関数
-function Setnumber()
-    if &number
-        setlocal nonumber
-    else
-        setlocal number
-    endif
-endfunction
-
 " ショートカットキー、 Ctrl + N で行番号の表示・非表示を切り替える
-nnoremap <silent> <C-n> :call Setnumber()<CR>
+nnoremap <silent> <C-n> :set number!<CR>
+" 検索時のハイライト切り替えを Ctrl + i で切り替える
+nnoremap <silent> <C-i> :set hlsearch!<CR>
 
 " 以前開いたカーソル位置へ移動する
 augroup vimrcEx
