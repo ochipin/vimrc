@@ -25,6 +25,8 @@ endif
 
 " vim plugin 有効化
 " $ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+" git clone できない場合は、次のコマンドを実行する必要がある
+" yum install nss curl libcurl
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#rc()
 
