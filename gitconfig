@@ -7,8 +7,11 @@
     quotepath = false
 [color]
     ui = auto
-[pretty]
-    # https://qiita.com/qurage/items/daa67763e5a0090af06a
-    pretty-gitlog = format:%C(red reverse)%d%Creset%C(white reverse) %h% Creset %C(green reverse) %an %Creset %C(cyan)%ar%Creset%n%C(white bold)%w(80)%s%Creset%n%n%w(80,2,2)%b
+[http]
+    postBuffer = 524880000
+[https]
+    postBuffer = 524880000
+    # proxy = http://proxy.com:8080
 [alias]
-    g = log --pretty=pretty-gitlog --graph --name-status
+    # https://qiita.com/qurage/items/daa67763e5a0090af06a
+    g = log --pretty=format:'%C(red reverse)%d%Creset%C(white reverse) %h% Creset %C(green reverse) %an %Creset %C(cyan)%ar%Creset%n%C(white bold)%w(80)%s%Creset%n%n%w(80,2,2)%b' --graph --name-status
