@@ -1,0 +1,14 @@
+[user]
+    name = Suguru Ochiai
+    email = suguru.ochiai@works.ochipin.net
+[core]
+    editor = vim 
+    pager = LESSCHARSET=utf-8 less
+    quotepath = false
+[color]
+    ui = auto
+[pretty]
+    # https://qiita.com/qurage/items/daa67763e5a0090af06a
+    pretty-gitlog = format:%C(red reverse)%d%Creset%C(white reverse) %h% Creset %C(green reverse) %an %Creset %C(cyan)%ar%Creset%n%C(white bold)%w(80)%s%Creset%n%n%w(80,2,2)%b
+[alias]
+    g = log --pretty=pretty-gitlog --graph --name-status
