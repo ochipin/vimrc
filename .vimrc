@@ -16,27 +16,29 @@ let g:colors_name = "syncolor"
 set t_Co=256
 
 " ファイルタイプ自動検出無効化
-filetype off 
+filetype off
+filetype plugin indent off
 
 " 互換性モード廃止
 if &compatible
     set nocompatible
 endif
 
-" vim plugin 有効化
+" vim plugin 有効化 :BundleInstall で、プラグインをインストール可能
 " $ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 " git clone できない場合は、次のコマンドを実行する必要がある
 " yum install nss curl libcurl
 set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#rc()
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
 
 " git commit 時以外、git plugin 有効化
 if expand("%t") != ".git/COMMIT_EDITMSG"
     " $ git clone https://github.com/airblade/vim-gitgutter.git ~/.vim/bundle/vim-gitgutter
     Plugin 'airblade/vim-gitgutter'
-    " $ git clone https://github.com/tpope/vim-fugitive.git ~/.vim/bundle/vim-fugitive
-    Plugin 'tpope/vim-fugitive'
 endif
+" $ git clone https://github.com/tpope/vim-fugitive.git ~/.vim/bundle/vim-fugitive
+Plugin 'tpope/vim-fugitive'
 
 " カーソル、バックスペースキーを通常エディタと同じ操作にする
 set backspace=start,eol,indent
@@ -52,11 +54,19 @@ set statusline=%<%F\ %h%m%r%{fugitive#statusline()}%=%-14.(all=%L\ %l,%c%V%)\ \[
 " Go言語の場合はハードタブを有効、タブ幅を4とする
 " $ git clone https://github.com/fatih/vim-go.git ~/.vim/bundle/vim-go
 if expand("%t") =~ ".*\.go"
+    let g:go_fmt_command = "goimports"
+    let g:go_gocode_unimported_packages = 1
+    let g:go_highlight_functions = 1
+    let g:go_highlight_methods = 1
+    let g:go_highlight_structs = 1
+    let g:go_highlight_function_calls = 1
+
     set noexpandtab
     set tabstop=4
     set shiftwidth=4
     " Go シンタックス有効化
     Plugin 'fatih/vim-go'
+    Plugin 'nsf/gocode', {'rtp', 'vim/'}
 " Go言語以外はソフトタブを有効とし、タブ幅を4とする
 else
     set expandtab
@@ -64,6 +74,8 @@ else
     set shiftwidth=4
 endif
 
+" 適当な*.goファイルを開き、:GoInstallBinariesを実行することで、Go関連のツールをインストール
+call vundle#end()
 filetype plugin indent on
 
 " 行番号/検索時のハイライトを表示する
