@@ -70,7 +70,7 @@ if expand("%t") =~ ".*\.go"
     set shiftwidth=4
     " Go シンタックス有効化
     Plugin 'fatih/vim-go'
-    Plugin 'nsf/gocode', {'rtp', 'vim/'}
+    Plugin 'nsf/gocode', {'rtp': 'vim/'}
 " Go言語以外はソフトタブを有効とし、タブ幅を4とする
 else
     set expandtab
