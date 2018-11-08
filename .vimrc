@@ -11,6 +11,9 @@ syntax on
 " $VIMRUNTIME/syntax/syncolor.vim を ~/.vim/colors/syncolor.vim へコピーする
 " コピーした、syncolor.vimへ独自のhighlight設定をすること
 let g:colors_name = "syncolor"
+" hi Comment ctermfg=2
+" hi Statement ctermfg=3
+" hi Boolean term=bold ctermfg=130 gui=bold guifg=Brown
 
 " vim 256色対応
 set t_Co=256
@@ -50,6 +53,7 @@ set ambiwidth=double
 " ステータスラインの設定
 set laststatus=2
 set statusline=%<%F\ %h%m%r%{fugitive#statusline()}%=%-14.(all=%L\ %l,%c%V%)\ \[ENC=%{&fileencoding}]%P
+" set statusline=%F%r%h%a=all:%L,%P:%l,%c
 
 " Go言語の場合はハードタブを有効、タブ幅を4とする
 " $ git clone https://github.com/fatih/vim-go.git ~/.vim/bundle/vim-go
