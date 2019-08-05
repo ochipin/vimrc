@@ -16,13 +16,19 @@ gitbranch() {
     local branch=`git rev-parse --abbrev-ref HEAD 2>/dev/null`
     case $branch in
         "") ;;
-        master) echo -e " (\e[1;31m$branch\e[m)" ;;
-        devel*) echo -e " (\e[1;33m$branch\e[m)" ;;
-        *) echo -e " (\e[1;32m$branch\e[m)" ;;
+        master) echo -e " \e[1;31m$branch\e[m" ;;
+        devel*) echo -e " \e[1;33m$branch\e[m" ;;
+        HEAD) ;;
+        *) echo -e " \e[1;32m$branch\e[m" ;;
     esac
 }
-export PS1='[\u@\h:\[\033[01;34m\]\W\[\033[00m\]$(gitbranch)]\[\033[01;37m\]\$\[\033[00m\] '
 
+now() {
+    date +%H:%M:%S
+}
+
+# export PS1='[\u@\h:\[\033[01;34m\]\W\[\033[00m\]$(gitbranch)]\[\033[01;37m\]\$\[\033[00m\] '
+export PS1='[\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\W\[\033[00m\] ($(now)$(gitbranch))]\$ '
 # Added Proxy Server
 # export https_proxy=http://proxy.com:8080
 # export http_proxy=$https_proxy
