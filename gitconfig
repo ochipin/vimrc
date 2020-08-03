@@ -5,6 +5,9 @@
     editor = vim 
     pager = LESSCHARSET=utf-8 less
     quotepath = false
+    # LFをGitがCRLFへ変更しようとするが、autoCRLFをfalseにすることで、変更しなくなる
+    # warning: CRLF will be replaced by LF in ... 警告メッセージが出なくなる
+    # autoCRLF = false
 [color]
     ui = auto
 [http]
