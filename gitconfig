@@ -7,7 +7,11 @@
     quotepath = false
     # LFをGitがCRLFへ変更しようとするが、autoCRLFをfalseにすることで、変更しなくなる
     # warning: CRLF will be replaced by LF in ... 警告メッセージが出なくなる
-    # autoCRLF = false
+    autoCRLF = false
+[merge]
+    ff = false
+[pull]
+    ff = only
 [color]
     ui = auto
 [http]
