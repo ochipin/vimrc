@@ -99,14 +99,5 @@ augroup END
 " 保存時に、git diff表示を有効にする
 autocmd BufWritePost * :GitGutterEnable
 
-" 次の設定を.bashrc/.bash_profileどちらかに記載することでgit環境は整う
-" gitbranch() {
-"     local branch=`git rev-parse --abbrev-ref HEAD 2>/dev/null`
-"     case $branch in
-"         "") ;;
-"         master) echo -e " (\e[1;31m$branch\e[m)" ;;
-"         devel*) echo -e " (\e[1;33m$branch\e[m)" ;;
-"         *) echo -e " (\e[1;32m$branch\e[m)" ;;
-"     esac
-" }
-" export PS1='[\u@\h:\[\033[01;34m\]\W\[\033[00m\]$(gitbranch)]\$ '
+" ビープ音を消す
+set visualbell t_vb=
