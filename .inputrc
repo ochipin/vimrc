@@ -1,2 +1,2 @@
-# ビープ音を消す
+# ~/.inputrc として配置することで、ビープ音を消す
 set bell-style none
