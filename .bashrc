@@ -70,5 +70,7 @@ export HISTCONTROL=ignoreboth
 # export http_proxy=http://xx.x.xx.xx:8888
 # export https_proxy=http://xx.x.xx.xx:8888
 
+umask 022
+
 # DIR_COLORSの変更
 eval $('dircolors')
