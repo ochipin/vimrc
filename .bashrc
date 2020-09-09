@@ -54,11 +54,17 @@ __prompt_command() {
     # history -r
 }
 
-# YYYY-MM-DD HH:MI:SS とする
+# 実行日時(YYYY-MM-DD HH:MI:SS)を.bash_historyへ保存する
 export HISTTIMEFORMAT='%F %T '
+
+# なるべく多くのコマンド履歴を保存する
 export HISTSIZE=100000
 export HISTFILESIZE=100000
+
+# .bash_historyに保存しないコマンドを設定する
 # export HISTIGNORE='history:pwd:ls:ls *:ll:w:top:df *'
+
+# 重複・空白の場合は.bash_historyへ保存しない
 export HISTCONTROL=ignoreboth
 # プロキシの設定が必要な場合、下記のコメントを外し、プロキシ設定を追加する
 # export http_proxy=http://xx.x.xx.xx:8888
