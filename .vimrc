@@ -39,6 +39,8 @@ Plugin 'VundleVim/Vundle.vim'
 if expand("%t") != ".git/COMMIT_EDITMSG"
     " $ git clone https://github.com/airblade/vim-gitgutter.git ~/.vim/bundle/vim-gitgutter
     Plugin 'airblade/vim-gitgutter'
+    " 保存時に、git diff表示を有効にする
+    autocmd BufWritePost * :GitGutterEnable
 endif
 " $ git clone https://github.com/tpope/vim-fugitive.git ~/.vim/bundle/vim-fugitive
 Plugin 'tpope/vim-fugitive'
@@ -96,8 +98,6 @@ augroup vimrcEx
     au BufRead * if line("'\"") > 0 && line("'\"") <= line("$") |
     \ exe "normal g'\"" | endif
 augroup END
-" 保存時に、git diff表示を有効にする
-autocmd BufWritePost * :GitGutterEnable
 
 " ビープ音を消す
 set visualbell t_vb=
