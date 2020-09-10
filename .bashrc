@@ -16,18 +16,13 @@ gitbranch() {
     case $branch in
         # コミットされたことがない場合は何も表示しない
         "" | HEAD) ;;
-        # master ブランチの場合は、赤色
-        master) echo -e " \e[1;31m$branch\e[m" ;;
-        # devel ブランチの場合は、黄色
-        devel*) echo -e " \e[1;33m$branch\e[m" ;;
-        # master, devel 以外のブランチは緑
-        *)      echo -e " \e[1;32m$branch\e[m" ;;
+        # masterブランチの場合は赤色
+        master) echo -e "(\e[1;31m$branch\e[m) " ;;
+        # develブランチの場合は黄色
+        devel*) echo -e "(\e[1;33m$branch\e[m) " ;;
+        # 上記以外のブランチの場合は緑にする
+        *)      echo -e "(\e[1;32m$branch\e[m) " ;;
     esac
-}
-
-# 現在時刻を取得する
-nowtime() {
-    date +"%H:%M:%S"
 }
 
 __prompt_user="\\u@\\h"
@@ -36,17 +31,18 @@ if [ "`id -u`" = "0" ]; then
     __prompt_user="\\[\\033[01;31m\\]\\u@\\h\\[\\033[00m\\]"
 fi
 
+# コマンド実行の成否をプロンプトに表示する
 PROMPT_COMMAND=__prompt_command
 __prompt_command() {
-    local curr_exit="$?"
-
-    if [ $curr_exit != 0 ]; then
-        # コマンド実行エラーの場合
-        PS1="[$__prompt_user:\\[\\033[01;34m\\]\\W\\[\\033[00m\\] ($(nowtime)$(gitbranch)) \\[\\033[01;31m\\]EC:$curr_exit\\[\\033[00m\\]]\\[\\033[01;31m\\]\\$\\[\\033[00m\\] "
+    local RES=$?
+    local EC=
+    if [ "$RES" = "0" ]; then
+        EC="EC:$RES]\[\033[01;32m\]\$\[\033[00m\]"
     else
-        # コマンド実行成功の場合
-        PS1="[$__prompt_user:\\[\\033[01;34m\\]\\W\\[\\033[00m\\] ($(nowtime)$(gitbranch)) EC:$curr_exit]\\[\\033[01;32m\\]\\$\\[\\033[00m\\] "
+        EC="\[\033[01;31m\]EC:$RES\[\033[00m\]]\[\033[01;31m\]\$\[\033[00m\]"
     fi
+    # [時間][ユーザID@ホスト名:ディレクトリ名 (ブランチ名) コマンド実行成否] を表示する
+    PS1="[\t][$__prompt_user:\[\033[01;34m\]\W\[\033[00m\] $(gitbranch)$EC "
 
     # コマンド実行直後.bash_historyに書き込む場合は、下記コメントを外す
     # history -a
