@@ -1,0 +1,90 @@
+" vim8は次の手順で導入可能
+" 1. yum install lua-devel perl-ExtUtils-Embed ruby-devel ncurses-devel
+" 2. git clone https://github.com/vim/vim
+" 3. cd vim && ./configure --prefix=$HOME/.local && make && make install
+
+" シンタックス有効化
+syntax on
+
+" 独自カラースキームを読み込む
+" vim8からは、vimrcにhighlight設定をしても適用されない(!?)ので、
+" $VIMRUNTIME/syntax/syncolor.vim を ~/.vim/colors/syncolor.vim へコピーする
+" コピーした、syncolor.vimへ独自のhighlight設定
+"   hi Comment ctermfg=2
+"   hi Statement ctermfg=3
+"   hi Boolean term=bold ctermfg=130 gui=bold guifg=Brown
+let g:colors_name = "syncolor"
+
+" 256色対応
+set t_Co=256
+
+" ファイルタイプ自動検出無効化
+filetype off
+filetype plugin indent off
+
+" 互換性モード廃止
+if &compatible
+    set nocompatible
+endif
+
+" カーソル、バックスペースキーを通常エディタと同じ操作にする
+set backspace=start,eol,indent
+set whichwrap=b,s,[,],,~
+
+" 2 byte 文字も正しく表示できるようにする
+set ambiwidth=double
+
+" ステータスラインの設定
+set laststatus=2
+set statusline=%F%r%h%a=all:%L,%P:%l,%c
+
+" vim plugin 有効化する。事前に、vim-plug をインストールする
+" 1. curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+" 2. インストール後、:PlugInstallで"Plug"に記載したプラグインをインストールする
+" 3. 適当な.goファイルを開き、:LspInstallServer を実行して、Goプラグインをインストールする
+call plug#begin('~/.vim/plugged')
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+Plug 'mattn/vim-lsp-settings'
+Plug 'mattn/vim-goimports'
+call plug#end()
+
+runtime! config/git-plug.vim
+runtime! config/go-plug.vim
+
+if expand("%t") =~ ".*\.go"
+    " Go言語の場合はハードタブを有効にし、タブ幅を4にする
+    set noexpandtab
+    set tabstop=4
+    set shiftwidth=4
+else
+    " 上記以外はソフトタブ + タブ幅4とする
+    set expandtab
+    set tabstop=4
+    set shiftwidth=4
+endif
+
+filetype plugin indent on
+
+" 行番号を表示する
+set number
+" 行番号の表示・非表示を切り替えるショートカット
+nnoremap <silent> <C-n> :set number!<CR>
+
+" 検索時のハイライトを表示する
+set hlsearch
+" 検索時のハイライトの表示・非表示を切り替えるショートカット
+nnoremap <silent> <C-i> :set hlsearch!<CR>
+
+" 以前開いたことがあるファイルの、カーソル位置へ移動する
+augroup vimrcEx
+    au BufRead * if line("'\"") > 0 && line("'\"") <= line("$") |
+    \ exe "normal g'\"" | endif
+augroup END
+
+" ビープ音を消す
+set visualbell t_vb=
