@@ -16,6 +16,8 @@
     ui = auto
 [http]
     postBuffer = 524880000
+    # sslVerify = false
+    # proxy = http://proxy.com:8080
 [https]
     postBuffer = 524880000
     # proxy = http://proxy.com:8080
