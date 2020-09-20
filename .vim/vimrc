@@ -5,6 +5,7 @@
 
 " シンタックス有効化
 syntax on
+colorscheme syncolor
 
 " 独自カラースキームを読み込む
 " vim8からは、vimrcにhighlight設定をしても適用されない(!?)ので、
