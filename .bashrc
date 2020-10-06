@@ -12,6 +12,8 @@ if [ -f /etc/bashrc ]; then
 fi
 
 # ブランチ名を取得する
+# 事前に、"git" をインストールしておくこと!
+# ex) dnf install git / apt-get install git
 gitbranch() {
     local branch=`git rev-parse --abbrev-ref HEAD 2>/dev/null`
     case $branch in
@@ -38,9 +40,9 @@ __prompt_command() {
     local RES=$?
     local EC=
     if [ "$RES" = "0" ]; then
-        EC="EC:$RES]\[\033[01;32m\]\$\[\033[00m\]"
+        EC="EC:$RES]\[\033[01;32m\]\\$\[\033[00m\]"
     else
-        EC="\[\033[01;31m\]EC:$RES\[\033[00m\]]\[\033[01;31m\]\$\[\033[00m\]"
+        EC="\[\033[01;31m\]EC:$RES\[\033[00m\]]\[\033[01;31m\]\\$\[\033[00m\]"
     fi
     # [時間][ユーザID@ホスト名:ディレクトリ名 (ブランチ名) コマンド実行成否] を表示する
     PS1="[\t][$__prompt_user:\[\033[01;34m\]\W\[\033[00m\] $(gitbranch)$EC "
