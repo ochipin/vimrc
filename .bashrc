@@ -84,6 +84,9 @@ export HISTFILESIZE=100000
 # 重複・空白の場合は.bash_historyへ保存しない
 export HISTCONTROL=ignoreboth
 
+# 言語設定
+export LANG=ja_JP.UTF-8
+
 # プロキシの設定が必要な場合、下記のコメントを外し、プロキシ設定を追加する
 # export http_proxy=http://xx.x.xx.xx:8888
 # export https_proxy=http://xx.x.xx.xx:8888
