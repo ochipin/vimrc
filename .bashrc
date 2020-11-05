@@ -12,6 +12,12 @@ if [ -f /etc/bashrc ]; then
     . /etc/bashrc
 fi
 
+# 現在最新のタグを表示する
+gittag() {
+    local tagname=`git describe --tags --first-parent --abbrev=0 2>/dev/null`
+    if [[ $tagname != "" ]] ; then echo ":$tagname"; fi
+}
+
 # 未追跡ファイル・変更されたファイルを分かるようにする
 gitchange() {
     git status | grep '^\(Changes\|Untracked\)' 2>&1 >/dev/null
@@ -19,6 +25,8 @@ gitchange() {
 }
 
 # ブランチ名を取得する
+# 事前に、"git" をインストールしておくこと!
+# ex) dnf install git / apt-get install git
 gitbranch() {
     local branch=`git rev-parse --abbrev-ref HEAD 2>/dev/null`
     case $branch in
@@ -28,15 +36,15 @@ gitbranch() {
         HEAD)
             branch=`git rev-parse --short HEAD 2>/dev/null`
             if [ ! $branch = "" ]; then
-                echo -e "(\e[1;36m`gitchange`$branch\e[m) "
+                echo -e "(\e[1;36m`gitchange`$branch`gittag`\e[m) "
             fi
             ;;
         # masterブランチの場合は赤色
-        master) echo -e "(\e[1;31m`gitchange`$branch\e[m) " ;;
+        master) echo -e "(\e[1;31m`gitchange`$branch`gittag`\e[m) " ;;
         # develブランチの場合は黄色
-        devel*) echo -e "(\e[1;33m`gitchange`$branch\e[m) " ;;
+        devel*) echo -e "(\e[1;33m`gitchange`$branch`gittag`\e[m) " ;;
         # 上記以外のブランチの場合は緑にする
-        *)      echo -e "(\e[1;32m`gitchange`$branch\e[m) " ;;
+        *)      echo -e "(\e[1;32m`gitchange`$branch`gittag`\e[m) " ;;
     esac
 }
 
