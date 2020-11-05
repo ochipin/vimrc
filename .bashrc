@@ -20,7 +20,7 @@ gittag() {
 
 # 未追跡ファイル・変更されたファイルを分かるようにする
 gitchange() {
-    git status | grep '^\(Changes\|Untracked\)' 2>&1 >/dev/null
+    git status | grep '\(Changes not staged for commit\|Untracked files\)' 2>&1 >/dev/null
     if [[ "$?" = 0 ]]; then echo '*'; fi
 }
 
