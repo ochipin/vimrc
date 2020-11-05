@@ -4,7 +4,7 @@
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
-alias ls='/bin/ls --color=auto'
+alias ls='/bin/ls --color=auto -v'
 alias ll='ls -l'
 
 # Source global definitions
