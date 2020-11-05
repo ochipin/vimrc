@@ -5,34 +5,38 @@ alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
 alias ls='/usr/bin/ls --color=auto'
+alias ll='ls -l'
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
     . /etc/bashrc
 fi
 
+# 未追跡ファイル・変更されたファイルを分かるようにする
+gitchange() {
+    git status | grep '^\(Changes\|Untracked\)' 2>&1 >/dev/null
+    if [[ "$?" = 0 ]]; then echo '*'; fi
+}
+
 # ブランチ名を取得する
-# 事前に、"git" をインストールしておくこと!
-# ex) dnf install git / apt-get install git
 gitbranch() {
-    if [[ ! -e .git ]]; then
-        return
-    fi
     local branch=`git rev-parse --abbrev-ref HEAD 2>/dev/null`
     case $branch in
         # コミットされたことがない場合は何も表示しない
-        "" | HEAD)
+        "") ;;
+        # HEAD の場合は、基本何もしないが直接コミットIDを指定されている場合は水色にする
+        HEAD)
             branch=`git rev-parse --short HEAD 2>/dev/null`
             if [ ! $branch = "" ]; then
-                echo -e "(\e[1;36m$branch\e[m) "
+                echo -e "(\e[1;36m`gitchange`$branch\e[m) "
             fi
             ;;
         # masterブランチの場合は赤色
-        master) echo -e "(\e[1;31m$branch\e[m) " ;;
+        master) echo -e "(\e[1;31m`gitchange`$branch\e[m) " ;;
         # develブランチの場合は黄色
-        devel*) echo -e "(\e[1;33m$branch\e[m) " ;;
+        devel*) echo -e "(\e[1;33m`gitchange`$branch\e[m) " ;;
         # 上記以外のブランチの場合は緑にする
-        *)      echo -e "(\e[1;32m$branch\e[m) " ;;
+        *)      echo -e "(\e[1;32m`gitchange`$branch\e[m) " ;;
     esac
 }
 
