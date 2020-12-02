@@ -84,6 +84,7 @@ SynLink Debug		Special
 delcommand SynColor
 delcommand SynLink
 
+hi LineNr ctermfg=0
 hi Comment ctermfg=2
 hi Statement ctermfg=3
 hi Boolean term=bold ctermfg=130 gui=bold guifg=Brown
