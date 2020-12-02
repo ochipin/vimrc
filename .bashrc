@@ -6,6 +6,7 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias ls='/bin/ls --color=auto -v'
 alias ll='ls -l'
+alias grep='/bin/grep --color=auto'
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
@@ -75,7 +76,7 @@ __prompt_command() {
     fi
 
     # [時間][ユーザID@ホスト名:ディレクトリ名 (ブランチ名) コマンド実行成否] を表示する
-    PS1="\\[\\033[01m\\][\\t]\\[\\033[00m\\][$__prompt_user:$DIR $(gitbranch)$EC "
+    PS1="\\[\\033[33m\\][\\t]\\[\\033[00m\\][$__prompt_user:$DIR $(gitbranch)$EC "
 
     # コマンド実行直後.bash_historyに書き込む場合は、下記コメントを外す
     # history -a
@@ -106,5 +107,5 @@ export LANG=ja_JP.UTF-8
 
 umask 022
 
-# DIR_COLORSの変更
-eval $('dircolors')
+# LS_COLORSの変更
+eval `dircolors | sed -e 's/ow=34;42/ow=30;42/g'`
