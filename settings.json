@@ -111,7 +111,8 @@
 
             // 34 の青
             "blue":          "#569CD6",
-            "brightBlue":    "#79B8FF",
+            "brightBlue":    "#569CD6",
+            // "brightBlue":    "#79B8FF",
 
             // 35 の紫
             "purple":        "#B392F0",
