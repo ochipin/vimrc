@@ -5,7 +5,6 @@
 
 " シンタックス有効化
 syntax on
-colorscheme syncolor
 
 " 独自カラースキームを読み込む
 " vim8からは、vimrcにhighlight設定をしても適用されない(!?)ので、
@@ -15,6 +14,7 @@ colorscheme syncolor
 "   hi Statement ctermfg=3
 "   hi Boolean term=bold ctermfg=130 gui=bold guifg=Brown
 let g:colors_name = "syncolor"
+colorscheme syncolor
 
 " 256色対応
 set t_Co=256
@@ -40,9 +40,11 @@ set laststatus=2
 set statusline=%F%r%h%a=all:%L,%P:%l,%c
 
 " vim plugin 有効化する。事前に、vim-plug をインストールする
-" 1. curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-" 2. インストール後、:PlugInstallで"Plug"に記載したプラグインをインストールする
-" 3. 適当な.goファイルを開き、:LspInstallServer を実行して、Goプラグインをインストールする
+"   1. curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+"   2. インストール後、:PlugInstallで"Plug"に記載したプラグインをインストールする
+"   3. 適当な.goファイルを開き、:LspInstallServer を実行して、Goプラグインをインストールする
+" アンインストールする時は、 :LspUninstallServer <plugname> を実行する
+" ex) :LspUninstallServer yaml-language-server
 call plug#begin('~/.vim/plugged')
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/asyncomplete.vim'
