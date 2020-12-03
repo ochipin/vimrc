@@ -84,7 +84,17 @@ SynLink Debug		Special
 delcommand SynColor
 delcommand SynLink
 
-hi LineNr ctermfg=0
-hi Comment ctermfg=2
-hi Statement ctermfg=3
+" 行番号の色を変更 (0;01m)
+hi LineNr ctermfg=darkgray
+" 検索時のハイライトの色を変更 (0)
+hi Search ctermbg=black
+" ソースコードのコメントの色を変更 (2)
+hi Comment ctermfg=darkgreen
+" 予約語等の色の変更 (3)
+hi Statement ctermfg=darkyellow
+" true / false などの真偽値の色を変更
 hi Boolean term=bold ctermfg=130 gui=bold guifg=Brown
+" 括弧のハイライトの色を変更
+hi MatchParen ctermfg=cyan ctermbg=black
+" カーソルハイライトの色を変更
+hi CursorColumn term=reverse ctermbg=black guibg=Grey90
