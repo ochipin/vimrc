@@ -96,3 +96,5 @@ hi Boolean term=bold ctermfg=130 gui=bold guifg=Brown
 hi Type ctermfg=darkyellow cterm=none
 " 予約語等の色の変更2 (3)
 hi Statement ctermfg=red cterm=bold
+" ステータスラインの背景色を設定
+hi StatusLine ctermbg=7 ctermfg=8
