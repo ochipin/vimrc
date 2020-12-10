@@ -55,7 +55,7 @@ __gitprompt() {
         # コミットされていない場合(+)
         git diff --no-ext-diff --cached --quiet
         if [[ ! $? = 0 ]]; then
-            nocommit='\e[33m+'
+            nocommit='\e[0;33m+'
             RPROMPT1="+$RPROMPT1"
         fi
         # 未追跡ファイルがある場合(%)
