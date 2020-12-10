@@ -1,5 +1,10 @@
 # .bash_profile
 
+# Get the aliases and functions
+if [ -f /etc/bashrc ]; then
+    . /etc/bashrc
+fi
+
 # rm/cp/mv コマンドは、毎度確認するようにする
 alias rm='rm -i'
 alias cp='cp -i'
@@ -7,11 +12,6 @@ alias mv='mv -i'
 alias ls='/bin/ls --color=auto -vG'
 alias ll='ls -l'
 alias grep='/bin/grep --color=auto'
-
-# Get the aliases and functions
-if [ -f /etc/bashrc ]; then
-    . /etc/bashrc
-fi
 
 # 現在最新のタグを表示する
 gittag() {
