@@ -1,7 +1,7 @@
 # .bash_profile
 
 # Get the aliases and functions
-if [ -f ~/.bashrc -a "$0" = "bash" ]; then
+if [[ -f ~/.bashrc && "$0" =~ [-]*bash ]]; then
     . ~/.bashrc
 fi
 
