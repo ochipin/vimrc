@@ -1,14 +1,14 @@
-# .bashrc
+# .bash_profile
 
-# User specific aliases and functions
+# rm/cp/mv コマンドは、毎度確認するようにする
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
-alias ls='/bin/ls --color=auto -v'
+alias ls='/bin/ls --color=auto -vG'
 alias ll='ls -l'
 alias grep='/bin/grep --color=auto'
 
-# Source global definitions
+# Get the aliases and functions
 if [ -f /etc/bashrc ]; then
     . /etc/bashrc
 fi
@@ -19,34 +19,56 @@ gittag() {
     if [[ $tagname != "" ]] ; then echo ":$tagname"; fi
 }
 
-# 未追跡ファイル・変更されたファイルを分かるようにする
-gitchange() {
-    git status 2>&1 | grep '\(Changes not staged for commit\|Untracked files\)' >/dev/null
-    if [[ "$?" = 0 ]]; then echo '*'; fi
-}
-
 # ブランチ名を取得する
 # 事前に、"git" をインストールしておくこと!
 # ex) dnf install git / apt-get install git
-gitbranch() {
+__gitbranch() {
     local branch=`git rev-parse --abbrev-ref HEAD 2>/dev/null`
     case $branch in
-        # コミットされたことがない場合は何も表示しない
         "") ;;
-        # HEAD の場合は、基本何もしないが直接コミットIDを指定されている場合は水色にする
         HEAD)
             branch=`git rev-parse --short HEAD 2>/dev/null`
-            if [ ! $branch = "" ]; then
-                echo -e "(\e[1;36m`gitchange`$branch`gittag`\e[m) "
+            if [ "$branch" = "" ]; then
+                branch=master
             fi
             ;;
-        # masterブランチの場合は赤色
-        master) echo -e "(\e[1;31m`gitchange`$branch`gittag`\e[m) " ;;
-        # develブランチの場合は黄色
-        devel*) echo -e "(\e[1;33m`gitchange`$branch`gittag`\e[m) " ;;
-        # 上記以外のブランチの場合は緑にする
-        *)      echo -e "(\e[1;32m`gitchange`$branch`gittag`\e[m) " ;;
     esac
+    echo $branch
+}
+
+# 右側にGitプロンプトを表示する
+__gitprompt() {
+    if [[ "`git rev-parse --is-inside-work-tree 2>/dev/null`" = "true" ]]; then
+        local branch=`__gitbranch`
+        local toplevel=`git rev-parse --show-toplevel`
+        local dirname=`basename $toplevel`
+        local unstage
+        local nocommit
+        local untrack
+        local RPROMPT1="[$dirname][$branch]"
+        # ステージングされておらず、変更されたファイルがある場合(*)
+        git diff --no-ext-diff --quiet
+        if [[ ! $? = 0 ]]; then
+            unstage='\e[1;31m*'
+            RPROMPT1="*$RPROMPT1"
+        fi
+        # コミットされていない場合(+)
+        git diff --no-ext-diff --cached --quiet
+        if [[ ! $? = 0 ]]; then
+            nocommit='\e[33m+'
+            RPROMPT1="+$RPROMPT1"
+        fi
+        # 未追跡ファイルがある場合(%)
+        git ls-files --others --exclude-standard --directory --no-empty-directory --error-unmatch -- ':/*' >/dev/null 2>&1
+        if [ $? = 0 ]; then
+            untrack='\e[0;34m%%'
+            RPROMPT1="%$RPROMPT1"
+        fi
+        # 右側にGitプロンプトを表示する
+        local RPROMPT="$untrack$nocommit$unstage[$dirname][$branch]\e[m"
+        local width=$(($COLUMNS - ${#RPROMPT1} - 2))
+        printf "%${width}s\e[1;32m$RPROMPT\\r" ''
+    fi
 }
 
 # プロンプトの設定
@@ -70,14 +92,16 @@ __prompt_command() {
 
     # コマンドの実行結果を判定する
     if [ "$RES" = "0" ]; then
-        EC="EC:$RES]\\[\\033[01;32m\\]\\$\\[\\033[00m\\]"
+        EC="EC:\\[\\033[01;32m\\]$RES\\[\\033[00m\\]]\\[\\033[01;32m\\]\\$\\[\\033[00m\\]"
     else
-        EC="\\[\\033[01;31m\\]EC:$RES]\\$\\[\\033[00m\\]"
+        EC="EC:\\[\\033[01;31m\\]$RES\\[\\033[00m\\]]\\[\\033[01;31m\\]\\$\\[\\033[00m\\]"
     fi
 
     # [時間][ユーザID@ホスト名:ディレクトリ名 (ブランチ名) コマンド実行成否] を表示する
-    PS1="\\[\\033[33m\\][\\t]\\[\\033[00m\\][$__prompt_user:$DIR $(gitbranch)$EC "
+    PS1="\\[\\033[33m\\][\\t]\\[\\033[00m\\][$__prompt_user:$DIR $EC "
 
+    # 右プロンプトにブランチ名やステージング、プロジェクトディレクトリ情報を表示する
+    __gitprompt
     # コマンド実行直後.bash_historyに書き込む場合は、下記コメントを外す
     # history -a
     # history -c
@@ -105,6 +129,7 @@ export LANG=ja_JP.UTF-8
 # export https_proxy=http://xx.x.xx.xx:8888
 # export no_proxy=localhost,127.0.0.1
 
+# umask を設定
 umask 022
 
 # LS_COLORSの変更
