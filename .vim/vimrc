@@ -46,14 +46,18 @@ set statusline=%F%r%h%a=all:%L,%P:%l,%c
 " アンインストールする時は、 :LspUninstallServer <plugname> を実行する
 " ex) :LspUninstallServer yaml-language-server
 call plug#begin('~/.vim/plugged')
+" Go Lsp 周りのプラグイン
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'prabirshrestha/vim-lsp'
-Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-fugitive'
 Plug 'mattn/vim-lsp-settings'
 Plug 'mattn/vim-goimports'
+" Gitプラグイン
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+" Markdownプラグイン
+Plug 'plasticboy/vim-markdown'
 call plug#end()
 
 runtime! config/git-plug.vim
