@@ -133,4 +133,6 @@ export LANG=ja_JP.UTF-8
 umask 022
 
 # LS_COLORSの変更
-eval `dircolors | sed -e 's/ow=34;42/ow=30;42/g'`
+if [ -f ~/.dircolors ]; then
+    export LS_COLORS=`cat ~/.dircolors`
+fi
