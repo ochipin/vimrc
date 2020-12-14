@@ -1,4 +1,4 @@
-# .bash_profile
+# .bashrc
 
 # Get the aliases and functions
 if [ -f /etc/bashrc ]; then
@@ -9,7 +9,7 @@ fi
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
-alias ls='/bin/ls --color=auto -vG'
+alias ls='/bin/ls --color=auto -v'
 alias ll='ls -l'
 alias grep='/bin/grep --color=auto'
 
