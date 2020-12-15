@@ -95,3 +95,14 @@ augroup END
 
 " ビープ音を消す
 set visualbell t_vb=
+
+" FIXME:, XXX:, TODO:, NOTE: の色
+augroup HilightsForce
+    autocmd!
+    autocmd WinEnter,BufRead,BufNew,Syntax * :silent! call matchadd('Fixme', '\(FIXME\|XXX\):')
+    autocmd WinEnter,BufRead,BufNew,Syntax * highlight Fixme ctermfg=White ctermbg=1
+    autocmd WinEnter,BufRead,BufNew,Syntax * :silent! call matchadd('Todo', '\(TODO\):')
+    autocmd WinEnter,BufRead,BufNew,Syntax * highlight Todo ctermfg=White ctermbg=2
+    autocmd WinEnter,BufRead,BufNew,Syntax * :silent! call matchadd('Note', '\(NOTE\):')
+    autocmd WinEnter,BufRead,BufNew,Syntax * highlight Note ctermfg=White ctermbg=12
+augroup END
