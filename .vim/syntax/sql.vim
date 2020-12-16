@@ -3,7 +3,7 @@ syn case ignore
 
 " PostgregreSQLに対応したキーワードや、型を定義する
 syn keyword pqKeyword CONSTRAINT PRIMARY KEY SCHEMA ROLE LOGIN NOLOGIN LIMIT PASSWORD DATABASE USAGE
-syn keyword pqType int int8 int16 int32 int64 bigint timestamp text
+syn keyword pqType int int8 int16 int32 int64 bigint timestamp text interval
 hi def link pqType Type
 
 " それぞれ色を付ける
