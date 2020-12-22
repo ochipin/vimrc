@@ -11,7 +11,17 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias ls='/bin/ls --color=auto -v'
 alias ll='ls -l'
-alias grep='/bin/grep --color=auto'
+# grep コマンドは isatty を考慮する
+grep() {
+    if [[ -p /dev/stdout ]]; then
+        # pipe の場合
+        /bin/grep --color=always $@
+    else
+        # fileへのリダイレクト、端末に表示するなどの場合
+        /bin/grep --color=auto $@
+    fi
+    return $?
+}
 
 # 現在最新のタグを表示する
 gittag() {
