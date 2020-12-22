@@ -12,13 +12,15 @@ alias mv='mv -i'
 alias ls='/bin/ls --color=auto -v'
 alias ll='ls -l'
 # grep コマンドは isatty を考慮する
+# '-h' でファイル名は非表示をデフォルトとする
+# 必要に応じて、 -n(行番号)、-H(ファイル名)などのオプションを使用すること
 grep() {
     if [[ -p /dev/stdout ]]; then
         # pipe の場合
-        /bin/grep --color=always $@
+        /bin/grep -h --color=always $@
     else
-        # fileへのリダイレクト、端末に表示するなどの場合
-        /bin/grep --color=auto $@
+        # file へのリダイレクト、端末に表示する場度の場合
+        /bin/grep -h --color=auto $@
     fi
     return $?
 }
