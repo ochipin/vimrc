@@ -113,7 +113,6 @@ __prompt_command() {
 # また、alpineのlessは挙動が少しおかしいため、`apk add less`で導入し直しておくこと
 export HIGHLIGHTER=1
 # 色付きコード用の設定をする
-# export LESS='-iRX~gs -x4 -z-4 --no-init --quit-if-one-screen --prompt=" %f line %l?L/%L. ?e(END) :?p%pB\\% ..(press h for help or q to quit)"'
 export LESS="-iRX~gs -x4 -z-4 --no-init --quit-if-one-screen --prompt=\ %f line %l?L/%L. ?e(END) :?p%pB\\% ..(press h for help or q to quit)"
 # highlight コマンドがインストール済みかチェックする
 which highlight 2>&1 >/dev/null
