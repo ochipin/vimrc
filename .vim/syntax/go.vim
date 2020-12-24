@@ -3,7 +3,7 @@
 " Maintainer: Suguru Ochiai
 " Last Change: 2020 Dec 3
 
-syn match addOperator "[!:=\+\-%&\/\*]"
+syn match addOperator "[!:=\+\-%&\/\*\>\<\|]"
 highlight link addOperator Operator
 hi Operator ctermfg=1 cterm=bold
 syn match Brackets "[\(\)\[\]\{\}]"
