@@ -4,7 +4,11 @@
 " 3. cd vim && ./configure --prefix=$HOME/.local && make && make install
 
 " シンタックス有効化
+syntax reset
 syntax on
+
+" デフォルト設定を読み込む
+source $VIMRUNTIME/defaults.vim
 
 " 独自カラースキームを読み込む
 " vim8からは、vimrcにhighlight設定をしても適用されない(!?)ので、
@@ -87,8 +91,17 @@ set hlsearch
 " 検索時のハイライトの表示・非表示を切り替えるショートカット
 nnoremap <silent> <C-i> :set hlsearch!<CR>
 
-" マウス操作を有効にする
-set mouse=a
+" F12 でマウス操作の On/Off 切り替え
+" On の時は、 Shift 押しながらでコピー&ペースト可能
+map <silent> <F12> :let &mouse=(&mouse == "a"?"":"a")<CR>
+imap <silent> <F12> :let &mouse=(&mouse == "a"?"":"a")<CR>
+
+" カーソルラインの設定
+set cursorline
+set cursorlineopt=number
+
+" マウス操作を起動時は無効にする
+set mouse-=a
 
 " 以前開いたことがあるファイルの、カーソル位置へ移動する
 augroup vimrcEx
