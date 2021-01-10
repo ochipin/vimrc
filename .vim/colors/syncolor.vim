@@ -12,3 +12,8 @@ hi Type ctermfg=3 cterm=none
 hi Statement ctermfg=1 cterm=bold
 " ステータスラインの背景色を設定
 hi StatusLine ctermbg=7 ctermfg=8
+" モードメッセージの色を設定
+hi ModeMsg cterm=none ctermfg=7
+" カーソルラインの色設定
+hi CursorLineNr cterm=none term=none ctermfg=7 ctermbg=0
+hi CursorLine cterm=none term=none ctermfg=none ctermbg=none
