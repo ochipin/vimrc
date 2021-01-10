@@ -87,6 +87,9 @@ set hlsearch
 " 検索時のハイライトの表示・非表示を切り替えるショートカット
 nnoremap <silent> <C-i> :set hlsearch!<CR>
 
+" マウス操作を有効にする
+set mouse=a
+
 " 以前開いたことがあるファイルの、カーソル位置へ移動する
 augroup vimrcEx
     au BufRead * if line("'\"") > 0 && line("'\"") <= line("$") |
