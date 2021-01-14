@@ -1,0 +1,23 @@
+Description="Highlight Source View"
+
+Categories = {"light"}
+
+Default        = { Colour="#E1E4E8" }
+Canvas         = { Colour="#6A737D" }
+Number         = { Colour="#569CD6" }
+Escape         = { Colour="#FF0000" }
+String         = { Colour="#B392F0" }
+StringPreProc  = { Colour="#B392F0" }
+BlockComment   = { Colour="#57A64A" }
+PreProcessor   = { Colour="#FFAB70" }
+LineNum        = { Colour="#6A737D" }
+Operator       = { Colour="#66D9EF" }
+LineComment    = BlockComment
+Interpolation  = { Colour="#183691" }
+
+Keywords = {
+  { Colour= "#F97583" },
+  { Colour= "#FFAB70" },
+  { Colour= "#FFAB70" },
+  { Colour= "#FFAB70" },
+}
