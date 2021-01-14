@@ -45,14 +45,21 @@ function! MyStatusLine()
     " fugitive プラグイン導入済みの場合は statusline にセットする
     if exists('g:loaded_fugitive')
         let fugitive = fugitive#head()
+        " development
         if fugitive =~? '^devel\|^dev$'
             let fugitive = '%4*  '.fugitive.'  %*'
+        " master
         elseif fugitive == 'master'
             let fugitive = '%3*  '.fugitive.'  %*'
+        " feature
         elseif fugitive =~? '^feature'
             let fugitive = '%6*  '.fugitive.'  %*'
+        " hotfix
         elseif fugitive =~? '^hotfix'
             let fugitive = '%1*  '.fugitive.'  %*'
+        " ブランチなし
+        elseif fugitive ==# ''
+            let fugitive = ''
         else
             let fugitive = '  ['.fugitive.']  '
         endif
