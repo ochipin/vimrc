@@ -41,7 +41,7 @@ __gitbranch() {
         HEAD)
             branch=`git rev-parse --short HEAD 2>/dev/null`
             if [ "$branch" = "" ]; then
-                branch=master
+                branch=$__DEFAULT_BRANCH
             fi
             ;;
     esac
@@ -82,6 +82,19 @@ __gitprompt() {
         printf "%${width}s\e[1;32m$RPROMPT\\r" ''
     fi
 }
+
+# git コマンドが存在するかチェックする
+which git 2>&1 >/dev/null
+if [[ ! $? = 0 ]]; then
+    # git コマンドがない場合は __gitprompt 関数を何もしない処理にする
+    __gitprompt() { echo -n ; }
+else
+    # git コマンドがある場合はデフォルトブランチ名を設定する
+    __DEFAULT_BRANCH="`git config init.defaultBranch`"
+    if [ "$__DEFAULT_BRANCH" = "" ]; then
+        __DEFAULT_BRANCH=main
+    fi
+fi
 
 # プロンプトの設定
 __prompt_user='\u@\h'
