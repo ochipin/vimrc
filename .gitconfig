@@ -1,3 +1,5 @@
+[init]
+    defaultBranch = main
 [user]
     name = Suguru Ochiai
     email = suguru.ochiai@works.ochipin.net
