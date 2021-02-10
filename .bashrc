@@ -11,6 +11,12 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias ls='/bin/ls --color=auto -v'
 alias ll='ls -l'
+# grep が alias 設定されている場合、一旦解除する
+alias grep >/dev/null 2>&1
+if [[ $? = 0 ]]; then
+    unalias grep
+fi
+
 # grep コマンドは isatty を考慮する
 # '-h' でファイル名は非表示をデフォルトとする
 # 必要に応じて、 -n(行番号)、-H(ファイル名)などのオプションを使用すること
@@ -84,7 +90,7 @@ __gitprompt() {
 }
 
 # git コマンドが存在するかチェックする
-which git 2>&1 >/dev/null
+which git >/dev/null 2>&1
 if [[ ! $? = 0 ]]; then
     # git コマンドがない場合は __gitprompt 関数を何もしない処理にする
     __gitprompt() { echo -n ; }
@@ -135,23 +141,25 @@ __prompt_command() {
 
 # highlight コマンドを利用した独自lessを利用する場合は "1" をセットする
 # highlight コマンドを利用する場合は、 `apk add highlight` でインストール可能
+# (RHEL/Ubuntu どちらも "highlight" でインストール可能)
 # また、alpineのlessは挙動が少しおかしいため、`apk add less`で導入し直しておくこと
 export HIGHLIGHTER=1
 # 色付きコード用の設定をする
 export LESS="-iRX~gs -x4 -z-4 --no-init --quit-if-one-screen --prompt=\ %f line %l?L/%L. ?e(END) :?p%pB\\% ..(press h for help or q to quit)"
-# highlight コマンドがインストール済みかチェックする
-which highlight 2>&1 >/dev/null
-# highlight コマンドがインストール済みの場合、less コマンドを設定する
+which highlight >/dev/null 2>&1
+# highlight コマンドがインストール済みでかつ、highlightを使用する場合、less コマンドを設定する
 if [[ $? = 0 && $HIGHLIGHTER = 1 ]]; then
     # .highlight ファイルで、独自色設定がされているか確認する
     __HIGHLIGHT_FILE=
     if [[ -f ~/.highlight ]]; then
         __HIGHLIGHT_FILE="-s $HOME/.highlight"
     fi
-    # 現状では、alpine linuxのみに対応する
+    # alpine linux、その他のlinuxとして処理を分ける
     if [[ -f /etc/alpine-release ]]; then
         # highlight の結果を less コマンドに渡すが、 --failsafe は設定しない。理由は何故か日本語が文字化けするため
         export LESSOPEN="| highlight --validate-input -O xterm256 $__HIGHLIGHT_FILE -t 4 -i %s 2>/dev/null"
+    else
+        export LESSOPEN="| highlight --validate-input --failsafe -O xterm256 -t 4 -i %s 2>/dev/null"
     fi
 fi
 
