@@ -146,8 +146,8 @@ __prompt_command() {
 export HIGHLIGHTER=1
 # 色付きコード用の設定をする
 export LESS="-iRX~gs -x4 -z-4 --no-init --quit-if-one-screen --prompt=\ %f line %l?L/%L. ?e(END) :?p%pB\\% ..(press h for help or q to quit)"
-which highlight >/dev/null 2>&1
 # highlight コマンドがインストール済みでかつ、highlightを使用する場合、less コマンドを設定する
+which highlight >/dev/null 2>&1
 if [[ $? = 0 && $HIGHLIGHTER = 1 ]]; then
     # .highlight ファイルで、独自色設定がされているか確認する
     __HIGHLIGHT_FILE=
@@ -169,6 +169,12 @@ export HISTTIMEFORMAT='%F %T '
 # なるべく多くのコマンド履歴を保存する
 export HISTSIZE=100000
 export HISTFILESIZE=100000
+
+# .bash_history の保存場所を変更する
+mkdir -p ~/.cache/history
+if [[ -d $HOME/.cache/history ]]; then
+    export HISTFILE=~/.cache/history/bash_history
+fi
 
 # .bash_historyに保存しないコマンドを設定する
 # export HISTIGNORE='history:pwd:ls:ls *:ll:w:top:df *'
