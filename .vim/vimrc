@@ -1,7 +1,9 @@
 " vim8は次の手順で導入可能
-" 1. yum install lua-devel perl-ExtUtils-Embed ruby-devel ncurses-devel
+" 1. yum install lua-devel perl-ExtUtils-Embed ruby-devel ncurses-devel python3-devel
 " 2. git clone https://github.com/vim/vim
-" 3. cd vim && ./configure --enable-multibyte --with-features=huge --disable-selinux --prefix=$HOME/.local && make && make install
+" 3. cd vim
+" 4. ./configure --enable-multibyte --with-tlib=ncurses --with-features=huge --enable-python3interp --enable-luainterp --disable-selinux --prefix=$HOME/.local
+" 5. make && make install
 
 " シンタックス有効化
 syntax reset
