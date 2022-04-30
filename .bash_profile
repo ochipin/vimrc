@@ -8,8 +8,4 @@ fi
 # User specific environment and startup programs
 
 # Export PATH
-export GOPATH=$HOME/.go/vendor
-export RBENV_ROOT=~/.rbenv
-export PATH=$HOME/.go/bin:$GOPATH/bin:$RBENV_ROOT/bin:$PATH
-
-# eval "$(rbenv init -)"
+export PATH=$HOME/.go/bin:$HOME/go/bin:$PATH
