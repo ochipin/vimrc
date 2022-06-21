@@ -12,13 +12,7 @@ syntax on
 " デフォルト設定を読み込む
 source $VIMRUNTIME/defaults.vim
 
-" 独自カラースキームを読み込む
-" vim8からは、vimrcにhighlight設定をしても適用されない(!?)ので、
-" $VIMRUNTIME/syntax/syncolor.vim を ~/.vim/colors/syncolor.vim へコピーする
-" コピーした、syncolor.vimへ独自のhighlight設定
-"   hi Comment ctermfg=2
-"   hi Statement ctermfg=3
-"   hi Boolean term=bold ctermfg=130 gui=bold guifg=Brown
+" 独自カラースキームを読み込む (~/.vim/colors/syncolor.vim)
 let g:colors_name = "syncolor"
 colorscheme syncolor
 
