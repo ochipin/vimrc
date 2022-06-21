@@ -1,4 +1,6 @@
 # ~/.inputrc として配置することで、ビープ音を消す
 set bell-style none
+# 大文字・小文字無視で補完
 set completion-ignore-case on
+# タブキー1回で補完
 set show-all-if-ambiguous on
