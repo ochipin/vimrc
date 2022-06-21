@@ -198,3 +198,5 @@ umask 022
 if [ -f ~/.dircolors ]; then
     export LS_COLORS=`cat ~/.dircolors`
 fi
+
+# eval "$(direnv hook bash)"
