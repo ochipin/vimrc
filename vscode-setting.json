@@ -1,0 +1,102 @@
+{
+    // Github Theme: GitHub Dark
+    "workbench.colorTheme": "GitHub Dark",
+    "workbench.editor.highlightModifiedTabs": true,
+    // ターミナルのカラーリングを変更
+    "workbench.colorCustomizations": {
+        "editorCursor.foreground": "#C8E1FF",
+        "terminal.background": "#24292E",
+        "terminal.foreground": "#E1E4E8",
+        "terminalCursor.background": "#C8E1FF",
+        "terminalCursor.foreground": "#C8E1FF",
+        "terminal.ansiBlack": "#444556",
+        "terminal.ansiBlue": "#79B8FF",
+        "terminal.ansiBrightBlack": "#6A737D",
+        "terminal.ansiBrightBlue": "#569CD6",
+        "terminal.ansiBrightCyan": "#9CDCFE",
+        "terminal.ansiBrightGreen": "#85E89D",
+        "terminal.ansiBrightMagenta": "#DA70D6",
+        "terminal.ansiBrightRed": "#F97583",
+        "terminal.ansiBrightWhite": "#FFF",
+        "terminal.ansiBrightYellow": "#FFAB70",
+        "terminal.ansiCyan": "#66D9EF",
+        "terminal.ansiGreen": "#57A64A",
+        "terminal.ansiMagenta": "#B392F0",
+        "terminal.ansiRed": "#F92672",
+        "terminal.ansiWhite": "#E1E4E8",
+        "terminal.ansiYellow": "#FFD700"
+    },
+    // ターミナルのフォント、カーソルなどを変更
+    "terminal.integrated.fontSize": 14,
+    "terminal.integrated.fontWeight": "normal",
+    "terminal.integrated.fontWeightBold": "normal",
+    "terminal.integrated.fontFamily": "Consolas, 'BIZ UDPゴシック'",
+    "terminal.integrated.cursorStyle": "line",
+    "terminal.integrated.cursorBlinking": true,
+    "terminal.integrated.cursorWidth": 2,
+    "terminal.integrated.enableBell": false,
+    "terminal.integrated.letterSpacing": 1,
+    // エディタのフォントを変更
+    "editor.fontFamily": "Consolas, 'BIZ UDPゴシック', 'BIZ UDゴシック', monospace",
+    "editor.formatOnSave": true,
+    "editor.suggestSelection": "first",
+    "editor.trimAutoWhitespace": false,
+    // コメントの色のみを変更
+    "editor.tokenColorCustomizations": {
+        "[GitHub Dark]": {
+            "comments": "#6A9955"
+        }
+    },
+    "files.eol": "\n",
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    "files.trimTrailingWhitespace": true,
+    // Go:
+    "go.toolsManagement.autoUpdate": true,
+    // Git:
+    "git.autofetch": true,
+    // Markdown エディタの設定
+    "[markdown]": {
+        "editor.unicodeHighlight.ambiguousCharacters": false,
+        "editor.unicodeHighlight.invisibleCharacters": false,
+        "editor.wordWrap": "on",
+        "editor.quickSuggestions": {
+            "comments": "off",
+            "strings": "off",
+            "other": "off"
+        },
+        "files.trimTrailingWhitespace": false
+    },
+    // "Todo Tree": コード内の BUG, TODO, NOTE コメントのカラーリング
+    "todo-tree.general.tags": [
+        "[BUG]",
+        "[TODO]",
+        "[NOTE]"
+    ],
+    "todo-tree.highlights.customHighlight": {
+        "[TODO]": {
+            "icon": "check",
+            "type": "tag",
+            "foreground": "#E1E4E8",
+            "background": "#57A64A",
+            "iconColour": "#57A64A",
+            "gutterIcon": true,
+        },
+        "[BUG]": {
+            "icon": "bug",
+            "type": "text",
+            "foreground": "#24292E",
+            "background": "#F92672",
+            "iconColour": "#F92672",
+            "gutterIcon": true,
+        },
+        "[NOTE]": {
+            "icon": "note",
+            "type": "tag",
+            "foreground": "#24292E",
+            "background": "#569CD6",
+            "iconColour": "#569CD6",
+            "gutterIcon": true,
+        }
+    }
+}
