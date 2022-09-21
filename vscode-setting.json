@@ -53,6 +53,8 @@
     "files.trimTrailingWhitespace": true,
     // Go:
     "go.toolsManagement.autoUpdate": true,
+    // Go Template:
+    "go-template.patterns": ["**/*.text"],
     // Git:
     "git.autofetch": true,
     // Markdown エディタの設定
