@@ -199,4 +199,7 @@ if [ -f ~/.dircolors ]; then
     export LS_COLORS=`cat ~/.dircolors`
 fi
 
+# 最新版のdirenvインストール
+#   1. curl -OL https://github.com/direnv/direnv/releases/latest/download/direnv.linux-amd64
+#   2. chmod 755 direnv.linux-amd64 && mv direnv.linux-amd64 ~/.local/bin/direnv
 # eval "$(direnv hook bash)"
