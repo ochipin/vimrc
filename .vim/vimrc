@@ -9,6 +9,9 @@
 syntax reset
 syntax on
 
+" UTF-8とする
+set encoding=utf-8
+
 " デフォルト設定を読み込む
 source $VIMRUNTIME/defaults.vim
 
