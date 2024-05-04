@@ -9,8 +9,9 @@ fi
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
-alias ls='/bin/ls --color=auto -v'
 alias ll='ls -l'
+# +page.svelteなど、"+"から始まるファイルを開くために必要
+alias vim='vim --'
 # grep が alias 設定されている場合、一旦解除する
 alias grep >/dev/null 2>&1
 if [[ $? = 0 ]]; then
